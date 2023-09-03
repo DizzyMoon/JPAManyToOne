@@ -1,7 +1,9 @@
 package com.example.jpamanytoone.service;
 
+import com.example.jpamanytoone.model.Kommune;
 import com.example.jpamanytoone.model.Region;
 import com.example.jpamanytoone.repository.RegionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +33,7 @@ public class ApiServiceRegionerImpl implements ApiServiceRegioner {
     }
 
     @Override
-    public List<Region> getRegioner() {
+    public void pullRegioner() {
         String regionUrl = "https://api.dataforsyningen.dk/regioner";
 
 
@@ -41,6 +43,26 @@ public class ApiServiceRegionerImpl implements ApiServiceRegioner {
                         });
         List<Region> regions = listResponseEntity.getBody();
         saveRegions(regions);
-        return regions;
+    }
+
+    @Override
+    public void deleteRegionById(String kode){
+        regionRepository.delete(getRegionById(kode));
+    }
+
+    @Override
+    public List<Region> getRegioner() {
+        return regionRepository.findAll();
+    }
+
+    @Override
+    public Region getRegionById(String kode){
+        List<Region> regioner = getRegioner();
+        for (Region region : regioner) {
+            if (region.getKode().equals(kode)){
+                return region;
+            }
+        }
+        return null;
     }
 }

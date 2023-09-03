@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface ApiServiceKommuner {
     List<Kommune> getKommuner();
+    void deleteKommune(String kode);
+    Kommune getKommuneById(String kode);
+    void pullKommuner();
 }

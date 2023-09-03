@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface KommuneRepository extends JpaRepository<Kommune, String> {
+    public Kommune findKommuneByKode(String kode);
 }

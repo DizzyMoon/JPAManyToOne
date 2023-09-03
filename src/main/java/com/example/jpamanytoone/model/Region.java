@@ -1,5 +1,6 @@
 package com.example.jpamanytoone.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -18,7 +19,9 @@ public class Region {
     private String href;
 
     @OneToMany(mappedBy = "region")
+    @JsonManagedReference
     private Set<Kommune> kommuneSet = new HashSet<>();
+
     public String getKode() {
         return kode;
     }

@@ -1,5 +1,6 @@
 package com.example.jpamanytoone.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,7 @@ public class Kommune {
 
     @ManyToOne
     @JoinColumn(name = "region", referencedColumnName = "kode")
+    @JsonBackReference
     private Region region;
 
     public String getKode() {
