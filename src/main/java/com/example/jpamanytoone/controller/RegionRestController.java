@@ -25,6 +25,13 @@ public class RegionRestController {
         return apiServiceRegioner.getRegionById(kode);
     }
 
+    @PostMapping("/region")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Region postRegion(@RequestBody Region region) {
+        System.out.println(region);
+        return apiServiceRegioner.saveRegion(region);
+    }
+
     @DeleteMapping("region/{kode}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> deleteRegion(@PathVariable String kode){
@@ -41,5 +48,16 @@ public class RegionRestController {
         }
     }
 
-
+    @PutMapping("/region/{kode}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Region> updateRegion(@PathVariable("kode") String kode, @RequestBody Region region){
+        Optional<Region> optionalRegion = Optional.ofNullable(apiServiceRegioner.getRegionById(kode));
+        if (optionalRegion.isPresent()){
+            region.setKode(kode);
+            apiServiceRegioner.saveRegion(region);
+            return ResponseEntity.ok(region);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

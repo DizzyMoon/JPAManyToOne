@@ -20,13 +20,10 @@ public class ApiServiceKommunerImpl implements ApiServiceKommuner {
         this.kommuneRepository = kommuneRepository;
     }
 
-    private void saveKommuner(List<Kommune> kommuner) {
+    public void saveKommuner(List<Kommune> kommuner) {
         kommuner.forEach(kommune -> kommuneRepository.save(kommune));
     }
 
-    private Kommune findKommuneByKode(String kode){
-        return kommuneRepository.findKommuneByKode(kode);
-    }
     @Override
     public void pullKommuner(){
         String regionUrl = "https://api.dataforsyningen.dk/kommuner";
@@ -58,5 +55,10 @@ public class ApiServiceKommunerImpl implements ApiServiceKommuner {
             }
         }
         return null;
+    }
+
+    @Override
+    public Kommune saveKommune(Kommune kommune){
+        return kommuneRepository.save(kommune);
     }
 }

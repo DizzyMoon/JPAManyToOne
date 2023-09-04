@@ -9,4 +9,5 @@ public interface ApiServiceRegioner {
     void pullRegioner();
     Region getRegionById(String kode);
     void deleteRegionById(String kode);
+    Region saveRegion(Region region);
 }

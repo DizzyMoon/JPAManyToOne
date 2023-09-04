@@ -38,4 +38,24 @@ public class KommuneRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Kommune not found");
         }
     }
+
+    @PutMapping("/kommune/{kode}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Kommune> updateKommune(@PathVariable("kode") String kode, @RequestBody Kommune kommune){
+        Optional<Kommune> optionalKommune = Optional.ofNullable(apiServiceKommuner.getKommuneById(kode));
+        if (optionalKommune.isPresent()){
+            kommune.setKode(kode);
+            apiServiceKommuner.saveKommune(kommune);
+            return ResponseEntity.ok(kommune);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/kommune")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Kommune postKommune(@RequestBody Kommune kommune){
+        System.out.println(kommune);
+        return apiServiceKommuner.saveKommune(kommune);
+    }
 }

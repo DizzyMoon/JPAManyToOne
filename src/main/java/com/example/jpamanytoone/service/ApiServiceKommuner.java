@@ -9,4 +9,6 @@ public interface ApiServiceKommuner {
     void deleteKommune(String kode);
     Kommune getKommuneById(String kode);
     void pullKommuner();
+    void saveKommuner(List<Kommune> kommuner);
+    Kommune saveKommune(Kommune kommune);
 }

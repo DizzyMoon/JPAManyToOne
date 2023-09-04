@@ -65,4 +65,9 @@ public class ApiServiceRegionerImpl implements ApiServiceRegioner {
         }
         return null;
     }
+
+    @Override
+    public Region saveRegion(Region region){
+        return regionRepository.save(region);
+    }
 }
