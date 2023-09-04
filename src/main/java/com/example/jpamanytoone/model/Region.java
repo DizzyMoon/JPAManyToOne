@@ -6,7 +6,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,6 +23,13 @@ public class Region {
     @OneToMany(mappedBy = "region")
     @JsonManagedReference
     private Set<Kommune> kommuneSet = new HashSet<>();
+
+    public List<String> getKommuneNavne(){
+        List<String> kommuneNavnList = new ArrayList<>();
+        this.kommuneSet.forEach(kommune -> kommuneNavnList.add(kommune.getNavn()));
+        return kommuneNavnList;
+    }
+
 
     public String getKode() {
         return kode;

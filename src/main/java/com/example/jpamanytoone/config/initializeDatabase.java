@@ -11,10 +11,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class initializeDatabase implements CommandLineRunner {
     @Autowired
-    RegionRepository regionRepository;
-    @Autowired
-    KommuneRepository kommuneRepository;
-    @Autowired
     ApiServiceKommuner apiServiceKommuner;
     @Autowired
     ApiServiceRegioner apiServiceRegioner;

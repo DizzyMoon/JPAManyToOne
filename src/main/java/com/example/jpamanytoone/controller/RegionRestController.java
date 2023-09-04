@@ -1,5 +1,6 @@
 package com.example.jpamanytoone.controller;
 
+import com.example.jpamanytoone.model.Kommune;
 import com.example.jpamanytoone.model.Region;
 import com.example.jpamanytoone.repository.RegionRepository;
 import com.example.jpamanytoone.service.ApiServiceRegioner;
@@ -8,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class RegionRestController {
@@ -59,5 +62,10 @@ public class RegionRestController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/kommunenavne/{kode}")
+    public List<String> getKommuneNavneByRegion(@PathVariable("kode") String kode){
+        return apiServiceRegioner.getRegionById(kode).getKommuneNavne();
     }
 }
